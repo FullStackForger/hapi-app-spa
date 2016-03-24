@@ -1,6 +1,6 @@
 {
   "name": "hapi-app-spa",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "hapi plugin for single page application",
   "main": "index.js",
   "scripts": {
