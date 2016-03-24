@@ -1,0 +1,27 @@
+{
+  "name": "hapi-app-spa",
+  "version": "0.1.0",
+  "description": "hapi plugin for single page application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/indieforger/hapi-app-spa.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/indieforger/hapi-app-spa/issues"
+  },
+  "homepage": "https://github.com/indieforger/hapi-app-spa#readme",
+  "dependencies": {
+    "inert": "3.x.x"
+  },
+  "peerDependencies": {
+    "boom": "^3.1.2",
+    "hapi": "13.x.x",
+    "hoek": "3.x.x"
+  }
+}
