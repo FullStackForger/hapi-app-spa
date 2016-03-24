@@ -2,7 +2,7 @@
 const Hapi = require('hapi');
 const connection = { host: 'localhost', port: '3000' };
 const plugins = [{
-	register: require('../lib/hapi-app-spa'),
+	register: require('../'),
 	options: {
 		//index: 'index.html', // default
 		assets: ['css', 'img', 'js', 'tpl', 'files']
