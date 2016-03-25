@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "code": "^2.1.1",
+    "forger": "^1.4.0",
     "lab": "^10.3.0"
   }
 }
