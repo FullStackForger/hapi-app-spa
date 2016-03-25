@@ -8,7 +8,7 @@ const server = new Hapi.Server({
 			files: {
 				// To simplify things, especially if you have multiple routes that respond with files,
 				// you can configure a base path in your server and only pass relative paths to reply.file()
-				relativeTo: Path.join(__dirname, '../test/public/angular-app')
+				relativeTo: Path.join(__dirname, './public/angular-app')
 			}
 		}
 	}

@@ -7,7 +7,7 @@ const plugins = [{
 	options: {
 		//index: 'index.html', // default
 		assets: ['css', 'img', 'js', 'tpl', 'files'],
-		relativeTo: Path.join(__dirname, '../test/public/angular-app')
+		relativeTo: Path.join(__dirname, './public/angular-app')
 	}
 }];
 const server = new Hapi.Server();
