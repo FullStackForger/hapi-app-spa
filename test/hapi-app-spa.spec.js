@@ -49,6 +49,7 @@ describe('hapi-app-spa', () => {
 			});
 		});
 	});
+
 	it('should respond with file', (done) => {
 		const plugin = {
 			register: require('../lib/hapi-app-spa'),
