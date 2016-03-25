@@ -51,6 +51,14 @@ describe('hapi-app-spa', () => {
 			});
 		});
 
+		it('should serve index', (done) => {
+			server.inject('/', (res) => {
+				expect(res.statusCode).to.equal(200);
+				expect(res.result).to.equal('<html><head><title>test</title></head><body><p>test</p></body></html>');
+				done();
+			});
+		});
+
 		it('should serve index for any non-file url', (done) => {
 			server.inject('/custom/path', (res) => {
 				expect(res.statusCode).to.equal(200);
