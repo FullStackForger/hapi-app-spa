@@ -1,11 +1,13 @@
 'use strict';
 const Hapi = require('hapi');
+const Path = require('path');
 const connection = { host: 'localhost', port: '3000' };
 const plugins = [{
 	register: require('../'),
 	options: {
 		//index: 'index.html', // default
-		assets: ['css', 'img', 'js', 'tpl', 'files']
+		assets: ['css', 'img', 'js', 'tpl', 'files'],
+		relativeTo: Path.join(__dirname, '../test/public/angular-app')
 	}
 }];
 const server = new Hapi.Server();
