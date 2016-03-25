@@ -6,7 +6,7 @@ const plugins = [{
 	register: require('../'),
 	options: {
 		//index: 'index.html', // default
-		assets: ['css', 'img', 'js', 'tpl', 'files'],
+		//assets: ['css', 'img', 'js', 'tpl', 'files'], // default
 		relativeTo: Path.join(__dirname, './public/angular-app')
 	}
 }];
