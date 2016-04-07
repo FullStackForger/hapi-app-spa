@@ -2,6 +2,7 @@
 const Hapi = require('hapi');
 const Code = require('code');
 const Lab = require('lab');
+const Hoek = require('hoek');
 const Spa = require('..');
 const Path = require('path');
 const Forger = require('forger');
@@ -40,7 +41,7 @@ describe('hapi-app-spa', () => {
 			server = new Hapi.Server();
 			server.connection();
 			server.register({
-				register: require('../lib/hapi-app-spa'),
+				register: Spa,
 				options: {
 					relativeTo: Path.join(__dirname, './public')
 				}
@@ -94,7 +95,7 @@ describe('hapi-app-spa', () => {
 
 	describe('custom options', () => {
 
-		it('should respond with file', (done) => {
+		it('should respond with file for custom relative path', (done) => {
 
 			const server = new Hapi.Server();
 			const plugin = {
@@ -121,6 +122,85 @@ describe('hapi-app-spa', () => {
 				});
 			});
 		});
+
+		it('should require authorization if server enforces default one', (done) => {
+			const server = new Hapi.Server();
+
+			server.connection();
+			server.register(require('hapi-auth-basic'), Hoek.ignore);
+			server.auth.strategy('basic', 'basic', true, { validateFunc: Hoek.ignore });
+			server.register({
+					register: require('../lib/hapi-app-spa'),
+					options:  {
+						relativeTo: Path.join(__dirname, './public')
+					}
+			}, (err) => {
+				expect(err).to.not.exist();
+
+				server.initialize((err) => {
+					expect(err).to.not.exist();
+
+					server.inject('/', (res) => {
+						expect(res.statusCode).to.equal(401);
+						done();
+					});
+				});
+			});
+		});
+
+		it('should allow to disable authorization', (done) => {
+			const server = new Hapi.Server();
+
+			server.connection();
+			server.register(require('hapi-auth-basic'), Hoek.ignore);
+			server.auth.strategy('basic', 'basic', true, { validateFunc: Hoek.ignore });
+			server.register({
+					register: require('../lib/hapi-app-spa'),
+					options:  {
+						auth: false,
+						relativeTo: Path.join(__dirname, './public')
+					}
+			}, (err) => {
+				expect(err).to.not.exist();
+
+				server.initialize((err) => {
+					expect(err).to.not.exist();
+
+					server.inject('/', (res) => {
+						expect(res.statusCode).to.equal(200);
+						done();
+					});
+				});
+			});
+		});
+
+		it('should allow custom authentication strategy', (done) => {
+			const server = new Hapi.Server();
+
+			server.connection();
+			server.register(require('hapi-auth-basic'), Hoek.ignore);
+			server.auth.strategy('basic', 'basic', { validateFunc: Hoek.ignore });
+			server.register({
+					register: require('../lib/hapi-app-spa'),
+					options:  {
+						auth: 'basic',
+						relativeTo: Path.join(__dirname, './public')
+					}
+			}, (err) => {
+				expect(err).to.not.exist();
+
+				server.initialize((err) => {
+					expect(err).to.not.exist();
+
+					server.inject('/', (res) => {
+						expect(res.statusCode).to.equal(401);
+						done();
+					});
+				});
+			});
+		});
+
+
+
 	});
 });
-
